@@ -10,3 +10,8 @@ class ProductPageLocators(object):
     BASKET_PRICE = (By.CSS_SELECTOR, ".alertinner>p>strong")
     PRODUCT_PRICE = (By.TAG_NAME, "h1+p")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, "#messages>.alert:nth-child(1)>.alertinner")
+
+
+class BasePageLocators(object):
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
