@@ -1,6 +1,6 @@
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
-from .locators import ProductPageLocators
+from .locators import ProductPageLocators, BasePageLocators
 
 
 class ProductPage(BasePage):
@@ -31,3 +31,15 @@ class ProductPage(BasePage):
     def should_not_be_success_message2(self):
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
             "Success message is disappeared"
+
+    def go_to_basket(self):
+        btn_view_basket = self.browser.find_element(*BasePageLocators.BTN_VIEW_BASKET)
+        btn_view_basket.click()
+
+    def should_not_be_product(self):
+        assert self.is_not_element_present(*BasePageLocators.BASKET_ITEMS), "product is presented, but should not be"
+
+    def should_be_empty_basket_message(self):
+        assert self.is_element_present(*BasePageLocators.EMPTY_BASKET_MESSAGE), "empty basket message is not presented"
+
+
