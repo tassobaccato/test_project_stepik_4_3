@@ -4,7 +4,6 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
 import math
 
 
@@ -60,6 +59,15 @@ class BasePage(object):
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
+
+    def go_to_basket(self):
+        btn_view_basket = self.browser.find_element(*BasePageLocators.BTN_VIEW_BASKET)
+        btn_view_basket.click()
+        # return basket(browser=self.browser, url=self.browser.current_url)
 
 
 class MainPage(BasePage):    # В классе MainPage у нас не осталось никаких методов, поэтому добавим туда заглушку
