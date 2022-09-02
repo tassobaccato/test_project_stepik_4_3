@@ -1,11 +1,10 @@
-from .locators import BasePageLocators, LoginPageLocators
+from .locators import BasePageLocators
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import math
-import time
 
 
 class BasePage(object):
@@ -73,12 +72,6 @@ class BasePage(object):
     def go_to_valid_login_link(self):
         valid_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         valid_link.click()
-
-    def register_new_user(self):
-        self.browser.find_element(*LoginPageLocators.FIELD_REGISTRATION_EMAIL).send_keys(str(time.time())+'@fakemail.org')
-        self.browser.find_element(*LoginPageLocators.FIELD_REGISTRATION_PASS1).send_keys("mko2559nji26")
-        self.browser.find_element(*LoginPageLocators.FIELD_REGISTRATION_PASS2).send_keys("mko2559nji26")
-        self.browser.find_element(*LoginPageLocators.BUTTON_REGISTER).click()
 
 
 class MainPage(BasePage):    # В классе MainPage у нас не осталось никаких методов, поэтому добавим туда заглушку

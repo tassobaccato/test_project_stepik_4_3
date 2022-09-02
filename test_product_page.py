@@ -1,8 +1,8 @@
 from .pages.product_page import ProductPage
 from .pages.base_page import BasePage
+from .pages.login_page import LoginPage
 import pytest
 import time
-#  pytest -s test_product_page.py
 
 promo_link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
 product_link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/"
@@ -71,11 +71,10 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
 
 
 @pytest.mark.add_to_basket
-class TestUserAddToBasketFromProductPage():
+class TestUserAddToBasketFromProductPage:
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
-    # def test_user_should_be_authorized(self, browser):
-        self.page = BasePage(browser, promo_link)
+        self.page = LoginPage(browser, promo_link)
         self.page.open()
         self.page.go_to_valid_login_link()
         self.page.register_new_user()
@@ -96,3 +95,5 @@ class TestUserAddToBasketFromProductPage():
         self.page.name_of_product_in_basket()
         self.page.message_basket_price()
         self.page.compare_product_and_basket_price()
+
+#  pytest -s test_product_page.py
