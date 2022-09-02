@@ -30,7 +30,7 @@ def test_empty_basket_message_is_disappeared(browser):
 
 
 @pytest.mark.login_guest        # pytest -m login_guest test_main_page.py
-class TestLoginFromMainPage():
+class TestLoginFromMainPage(object):
     @pytest.mark.xfail(reason="invalid link")
     def test_guest_can_go_to_login_page(self, browser):
         page = BasePage(browser, link)

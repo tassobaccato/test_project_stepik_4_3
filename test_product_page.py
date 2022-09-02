@@ -1,5 +1,7 @@
 from .pages.product_page import ProductPage
+from .pages.base_page import BasePage
 import pytest
+import time
 #  pytest -s test_product_page.py
 
 promo_link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
@@ -71,19 +73,26 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
 @pytest.mark.add_to_basket
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
-    def setup(self):
-        self.page =
-    def test_user_cant_see_success_message(browser):
-        page = ProductPage(browser, promo_link)
-        page.open()
-        page.should_not_be_success_message()
+    def setup(self, browser):
+    # def test_user_should_be_authorized(self, browser):
+        self.page = BasePage(browser, promo_link)
+        self.page.open()
+        self.page.go_to_valid_login_link()
+        self.page.register_new_user()
+        time.sleep(5)
+        self.page.should_be_authorized_user()
 
-    def test_user_can_add_product_to_basket(browser):
-        page = ProductPage(browser, promo_link)
-        page.open()
-        page.add_to_basket()
-        page.solve_quiz_and_get_code()
-        page.message_product_in_basket()
-        page.name_of_product_in_basket()
-        page.message_basket_price()
-        page.compare_product_and_basket_price()
+    def test_user_cant_see_success_message(self, browser):
+        self.page = ProductPage(browser, promo_link)
+        self.page.open()
+        self.page.should_not_be_success_message()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        self.page = ProductPage(browser, promo_link)
+        self.page.open()
+        self.page.add_to_basket()
+        self.page.solve_quiz_and_get_code()
+        self.page.message_product_in_basket()
+        self.page.name_of_product_in_basket()
+        self.page.message_basket_price()
+        self.page.compare_product_and_basket_price()
