@@ -6,20 +6,21 @@ promo_link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-ha
 product_link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/"
 
 
+# link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{promo_offer}"
+# link ="http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
 # @pytest.mark.parametrize('promo_offer', ["0", "1", "3", "4", "5", "6", pytest.param("7", marks=pytest.mark.xfail),
 # "8", "9"])
 # def test_guest_can_add_product_to_basket(browser, promo_offer):
 
+@pytest.mark.need_review
 def test_guest_can_add_product_to_basket(browser):
-    # link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{promo_offer}"
-    # link ="http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
-    page = ProductPage(browser, promo_link)  # инициализируем Page Object, передаем в конструктор экземпл драйвера и url
-    page.open()                     # открываем страницу
-    page.add_to_basket()            # нажимаем на кнопку добавить в корзину
-    page.solve_quiz_and_get_code()  # решаем quiz
-    page.message_product_in_basket()  # проверяем сообщение о добавлении товара в корзину
-    page.name_of_product_in_basket()   # соответствует ли название добавленного товара товару в корзине
-    page.message_basket_price()       # проверяем сообщение со стоимостью корзины
+    page = ProductPage(browser, promo_link)  # инициализируем Page Object
+    page.open()                              # открываем страницу
+    page.add_to_basket()                     # нажимаем на кнопку добавить в корзину
+    page.solve_quiz_and_get_code()           # решаем quiz
+    page.message_product_in_basket()         # проверяем сообщение о добавлении товара в корзину
+    page.name_of_product_in_basket()         # соответствует ли название добавленного товара товару в корзине
+    page.message_basket_price()              # проверяем сообщение со стоимостью корзины
     page.compare_product_and_basket_price()  # совпадает ли стоимость корзины с ценой товара
 
 
@@ -53,6 +54,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.should_be_login_link()
 
 
+@pytest.mark.need_review
 @pytest.mark.xfail(reason="login link is invalid")
 def test_guest_can_go_to_login_page_from_product_page(browser):
     page = ProductPage(browser, product_link)
@@ -60,6 +62,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.go_to_login_page()
 
 
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     page = ProductPage(browser, product_link)
     page.open()
@@ -83,6 +86,7 @@ class TestUserAddToBasketFromProductPage:
         self.page.open()
         self.page.should_not_be_success_message()
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         self.page = ProductPage(browser, promo_link)
         self.page.open()
@@ -95,3 +99,4 @@ class TestUserAddToBasketFromProductPage:
 
 # pytest -s test_product_page.py
 # pytest -m add_to_basket test_product_page.py
+# pytest -v --tb=line --language=en -m need_review test_product_page.py
