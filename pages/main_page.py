@@ -1,4 +1,4 @@
-from .pages.base_page import BasePage
+from .base_page import BasePage
 
 
 class MainPage(BasePage):    # В классе MainPage у нас не осталось никаких методов, поэтому добавим туда заглушку

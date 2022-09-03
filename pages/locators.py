@@ -26,6 +26,3 @@ class LoginPageLocators(object):
     FIELD_REGISTRATION_PASS1 = (By.ID, "id_registration-password1")
     FIELD_REGISTRATION_PASS2 = (By.ID, "id_registration-password2")
     BUTTON_REGISTER = (By.CSS_SELECTOR, "button[name='registration_submit']")
-
-
-

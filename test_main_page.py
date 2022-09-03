@@ -41,3 +41,6 @@ class TestLoginFromMainPage(object):
         page = BasePage(browser, link)
         page.open()
         page.should_be_login_link()
+
+# pytest -s test_main_page.py
+# pytest -m login_guest test_main_page.py

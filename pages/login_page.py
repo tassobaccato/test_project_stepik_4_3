@@ -9,7 +9,3 @@ class LoginPage(BasePage):
         self.browser.find_element(*LoginPageLocators.FIELD_REGISTRATION_PASS1).send_keys("mko2559nji26")
         self.browser.find_element(*LoginPageLocators.FIELD_REGISTRATION_PASS2).send_keys("mko2559nji26")
         self.browser.find_element(*LoginPageLocators.BUTTON_REGISTER).click()
-
-
-
-

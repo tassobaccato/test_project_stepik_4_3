@@ -1,7 +1,6 @@
 from .pages.product_page import ProductPage
 from .pages.login_page import LoginPage
 import pytest
-import time
 
 promo_link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
 product_link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/"
@@ -14,7 +13,7 @@ product_link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/"
 def test_guest_can_add_product_to_basket(browser):
     # link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{promo_offer}"
     # link ="http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
-    page = ProductPage(browser, promo_link)  #инициализируем Page Object, передаем в конструктор экземпляр драйвера и url
+    page = ProductPage(browser, promo_link)  # инициализируем Page Object, передаем в конструктор экземпл драйвера и url
     page.open()                     # открываем страницу
     page.add_to_basket()            # нажимаем на кнопку добавить в корзину
     page.solve_quiz_and_get_code()  # решаем quiz
@@ -77,7 +76,6 @@ class TestUserAddToBasketFromProductPage:
         self.page.open()
         self.page.go_to_valid_login_link()
         self.page.register_new_user()
-        time.sleep(5)
         self.page.should_be_authorized_user()
 
     def test_user_cant_see_success_message(self, browser):
@@ -95,4 +93,5 @@ class TestUserAddToBasketFromProductPage:
         self.page.message_basket_price()
         self.page.compare_product_and_basket_price()
 
-#  pytest -s test_product_page.py
+# pytest -s test_product_page.py
+# pytest -m add_to_basket test_product_page.py
